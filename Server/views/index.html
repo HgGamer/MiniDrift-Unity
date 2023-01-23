@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style> 
+        .prevent-select {
+            font-size: 2em;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Chrome/Safari/Opera */
+            -khtml-user-select: none; /* Konqueror */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                              not supported by any browser */
+        }
+        </style>
     
+</head>
+<body style="width: 100%;height: 100vh" > 
+    <div id="carselector" style="width: 100%;height: 100vh;">
+        <button type="button" id="button_carselector_left"  style="width: 25%;height: 100vh">Left</button>
+        <img id="car"  src="car1.png" style="width: 48%;height: auto;">
+        <button type="button" id="button_carselector_right"  style="width: 25%;height: 100vh">Right</button>
+        <button type="button" id="start" style="width: 100%;height: 25%; position:absolute;">START</button>
+    </div>
+   
+    <div id="controller" style="width: 100%;height: 100vh;display: none;">
+       
+        <button type="button" id="" style="width: 50%;height: 49%;">_</button>
+        <button type="button" id="buttonup" style="width: 49%;height: 49%;">Up</button>
+        <button type="button" id="buttonleft"  style="width: 25%;height: 49%">Left</button>
+        <button type="button" id="buttonright"  style="width: 25%;height: 49%">Right</button>
+        <button type="button" id="buttondown"  style="width: 48%;height: 49%">Down</button>
+    </div>
+<script src="main.js"></script>
 </body>
 </html>

@@ -25,13 +25,25 @@ app.get('/', function(req, res) {
 
 //controllers
 const wss = new WebSocket.Server({ server });
+wss.getUniqueID = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4();
+};
+
 wss.on('connection', (socket) => {
+    socket.id = wss.getUniqueID();
+
     socket.on('message', (message) => {
         console.log('received: %s', message);
-        socket.send(`Hello, you sent -> ${message}`);
-        unity.send(''+message);
+        let msg = socket.id + "|" + message;
+     
+        if(unity){
+            unity.send(''+msg);
+        }
+       
     });
-    socket.send('Hi there, I am a WebSocket server');
 });
 
 server.listen( 8080, () => {
@@ -47,5 +59,5 @@ ws.on('connection', (socket) => {
         console.log('received: %s', message);
         socket.send(`Hello, you sent -> ${message}`);
     });
-    socket.send('Hi there, I am a WebSocket server');
+  
 });

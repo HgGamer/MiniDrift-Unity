@@ -12,7 +12,6 @@ public enum EventType
 public class WSEvent 
 {
     public string Name;
-    public WebSocketContext Context;
     public string Data;
     public EventType Type;
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject cubeInstance;
+    public GameObject car1;
+    public GameObject car2;
+    public GameObject car3;
+    public GameObject car4;
     void Start()
     {
         EventManager.OnPlayerJoin += PlayerJoin;
@@ -16,17 +19,26 @@ public class Spawner : MonoBehaviour
         EventManager.OnPlayerJoin -= PlayerJoin;
         EventManager.OnPlayerLeave -= PlayerLeave;
     }
-    void PlayerJoin(string player)
+    void PlayerJoin(string player,string properties)
     {
-        //Debug.Log("player joined __" + "asd");
-        Debug.Log("player joined __" );
-
-        var instance = Instantiate(cubeInstance);
+        
+        Debug.Log("PlayerJoin: "+properties);
+        GameObject instance = null; 
+        if(properties == "1"){
+            instance = Instantiate(car1);
+        }
+        if(properties == "2"){
+            instance = Instantiate(car2);
+        }
+        if(properties == "3"){
+            instance = Instantiate(car3);
+        }
+        if(properties == "4"){
+            instance = Instantiate(car4);
+        }
+        
         instance.transform.name = player;
         instance.transform.parent = transform;
-
-        Debug.Log("player joined __" + "dsaasd");
-
     }
     void PlayerLeave(string player)
     {
