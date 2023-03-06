@@ -42,7 +42,12 @@ wss.on('connection', (socket) => {
         if(unity){
             unity.send(''+msg);
         }
-       
+    });
+    socket.on('close', () => {
+        let msg = socket.id + "|" + "disconnected";
+        if(unity){
+            unity.send(''+msg);
+        }
     });
 });
 

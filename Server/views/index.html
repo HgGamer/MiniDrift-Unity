@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
     <style> 
         .prevent-select {
             font-size: 2em;
@@ -14,15 +14,16 @@
             user-select: none; /* Non-prefixed version, currently
                               not supported by any browser */
         }
+
         </style>
     
 </head>
 <body style="width: 100%;height: 100vh" > 
     <div id="carselector" style="width: 100%;height: 100vh;">
-        <button type="button" id="button_carselector_left"  style="width: 25%;height: 100vh">Left</button>
-        <img id="car"  src="car1.png" style="width: 48%;height: auto;">
-        <button type="button" id="button_carselector_right"  style="width: 25%;height: 100vh">Right</button>
-        <button type="button" id="start" style="width: 100%;height: 25%; position:absolute;">START</button>
+        <button type="button" id="button_carselector_left"  style="width: 25%;height: 70%;vertical-align: top;display: inline-block;">Left</button>
+        <button type="button" style="width: 48%;height: 70%;background-color: #313131;border: 0px;">  <img id="car" src="car1.png" style="width: 100%"></button>
+        <button type="button" id="button_carselector_right"  style="width: 25%;height: 70%;vertical-align: top;display: inline-block;">Right</button><br>
+        <button type="button" id="start" style="width: 100%;height: 30%; position:absolute;">START</button>
     </div>
    
     <div id="controller" style="width: 100%;height: 100vh;display: none;">

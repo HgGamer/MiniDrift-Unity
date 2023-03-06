@@ -1,4 +1,5 @@
-const ws = new WebSocket('wss://192.168.1.195:8080')
+
+const ws = new WebSocket('wss://'+location.host)
 ws.onopen = () => {
   console.log('ws opened on browser')
  
@@ -11,12 +12,13 @@ function send(data) {
   ws.send(data)
 }
 
+
 function handleOrientation(event) {
   console.log(event.alpha+","+event.beta+","+event.gamma);
   ws.send(event.alpha+","+event.beta+","+event.gamma);
 }
 var currentCar = 1;
-var maxcars = 4;
+var maxcars = 7;
 document.getElementById("button_carselector_left").addEventListener("touchstart", function(event) {
   event.preventDefault();
   if(currentCar>1){
