@@ -15,11 +15,13 @@ app.set('view engine', 'ejs');
 const options = {
     key: fs.readFileSync("./config/localhost.key"),
     cert: fs.readFileSync("./config/localhost.crt"),
+    secureProtocol: "TLSv1_2_client_method"
   };
 
 const server = https.createServer(options,app);
 
 app.get('/', function(req, res) {
+
     res.render('index.html');
 });
 

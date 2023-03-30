@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    <style> 
+        .prevent-select {
+            font-size: 2em;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Chrome/Safari/Opera */
+            -khtml-user-select: none; /* Konqueror */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                              not supported by any browser */
+        }
+
+        </style>
+    
+</head>
+<body style="width: 100%;height: 100vh" > 
+    <div id="carselector" style="width: 100%;height: 100vh;">
+        <button type="button" id="button_carselector_left"  style="width: 25%;height: 70%;vertical-align: top;display: inline-block;">Left</button>
+        <button type="button" style="width: 48%;height: 70%;background-color: #313131;border: 0px;">  <img id="car" src="car1.png" style="width: 100%"></button>
+        <button type="button" id="button_carselector_right"  style="width: 25%;height: 70%;vertical-align: top;display: inline-block;">Right</button><br>
+        <button type="button" id="start" style="width: 100%;height: 30%; position:absolute;">START</button>
+    </div>
+   
+    <div id="controller" style="width: 100%;height: 100vh;display: none;">
+       
+        <button type="button" id="" style="width: 50%;height: 49%;">_</button>
+        <button type="button" id="buttonup" style="width: 49%;height: 49%;">Up</button>
+        <button type="button" id="buttonleft"  style="width: 25%;height: 49%">Left</button>
+        <button type="button" id="buttonright"  style="width: 25%;height: 49%">Right</button>
+        <button type="button" id="buttondown"  style="width: 48%;height: 49%">Down</button>
+    </div>
+<script src="main.js"></script>
+</body>
+</html>
