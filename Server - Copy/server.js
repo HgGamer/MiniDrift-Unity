@@ -13,8 +13,8 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 const options = {
-    key: fs.readFileSync("./config/localhost.key"),
-    cert: fs.readFileSync("./config/localhost.crt"),
+    key: fs.readFileSync("./config/test.key"),
+    cert: fs.readFileSync("./config/test.crt"),
   };
 
 const server = https.createServer(options,app);
