@@ -20,7 +20,7 @@ public class FleckTest : MonoBehaviour
         FleckLog.Level = LogLevel.Debug;
         server = new WebSocketServer("wss://0.0.0.0:8432");
         server.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
-        server.Certificate = new X509Certificate2("test.com.pfx","123456");
+        server.Certificate = new X509Certificate2("local.pfx","123456");
         server.Start(socket =>
         {
             socket.OnOpen = () => Debug.Log("Open!");

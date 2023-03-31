@@ -1,5 +1,5 @@
 
-const ws = new WebSocket('wss://test.com:8432')
+const ws = new WebSocket('wss://s1.app.catfood.li:8432')
 ws.onopen = () => {
   console.log('ws opened on browser')
  
