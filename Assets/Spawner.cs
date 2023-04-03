@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
     public GameObject car5;
     public GameObject car6;
     public GameObject car7;
+    public GameObject pointer;
+    public Transform pointerparent;
     void Start()
     {
         EventManager.OnPlayerJoin += PlayerJoin;
@@ -45,12 +47,21 @@ public class Spawner : MonoBehaviour
          if(properties == "6"){
             instance = Instantiate(car6);
         }
-         if(properties == "7"){
+        if(properties == "7"){
             instance = Instantiate(car7);
         }
         
+        if (properties == "8")
+        {
+            instance = Instantiate(pointer);
+            instance.transform.parent = pointerparent;
+        }
+        else
+        {
+            instance.transform.parent = transform;
+        }
         instance.transform.name = player;
-        instance.transform.parent = transform;
+       
     }
     void PlayerLeave(string player)
     {

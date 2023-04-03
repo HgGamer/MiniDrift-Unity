@@ -36,7 +36,8 @@ public class Client : MonoBehaviour
             socket.OnClose = () => Debug.Log("Close!");
            
             socket.OnMessage = (message => {
-               
+
+              
                 WSEvent _event = new WSEvent();
                 _event.Type = EventType.Message;
                 
