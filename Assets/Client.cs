@@ -8,10 +8,11 @@ using ZXing;
 using ZXing.QrCode;
 using System.Net;
 using System.Net.Sockets;
+using Fleck;
 
+using System.Security.Cryptography.X509Certificates;
 
-
- enum SslProtocolsHack
+enum SslProtocolsHack
 {
     Tls = 192,
     Tls11 = 768,
@@ -19,72 +20,68 @@ using System.Net.Sockets;
 }
 public class Client : MonoBehaviour
 {
+    WebSocketServer server;
     public RawImage image;
-    DateTime foo = DateTime.Now;
-    WebSocket ws;
+
     void Start()
     {
-        image.texture = generateQR("https://"+GetLocalIPAddress()+":8080");
-        ws = new WebSocket("ws://localhost:8000");
-      
-        ws.OnMessage += (sender, e) =>
+        image.texture = generateQR("https://s1.app.catfood.li:8080/");
+        server = new WebSocketServer("wss://0.0.0.0:8432");
+        server.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+        server.Certificate = new X509Certificate2("local.pfx", "123456");
+
+        server.Start(socket =>
         {
-            Debug.Log(e.Data);
-            WSEvent _event = new WSEvent();
-            _event.Type = EventType.Message;
-            _event.Name = e.Data.Split("|")[0];
-            _event.Data = e.Data.Split("|")[1];
-            if(e.Data.Split("|")[1] == "createCar")
-            {
-                _event.Type = EventType.Open;
-                _event.Data = e.Data.Split("|")[2];
-            }
-            if(e.Data.Split("|")[1] == "disconnected")
-            {
-                _event.Type = EventType.Close;
-            }
+            socket.OnOpen = () => Debug.Log("Open!");
+            socket.OnClose = () => Debug.Log("Close!");
            
-           
-            EventManager.events.Enqueue(_event);
-           
-        };
+            socket.OnMessage = (message => {
+               
+                WSEvent _event = new WSEvent();
+                _event.Type = EventType.Message;
+                
+                _event.Name = socket.ConnectionInfo.Id.ToString();
+                _event.Data = message.Split("|")[0];
+                if (message.Split("|")[0] == "createCar")
+                {
+                    _event.Type = EventType.Open;
+                    _event.Data = message.Split("|")[1];
+                  
+                }
+                if (message.Split("|")[0] == "disconnected")
+                {
+                    _event.Type = EventType.Close;
+                }
+                EventManager.events.Enqueue(_event);
+            });
+        });
 
-        ws.OnOpen += (sender, e) =>{
-          
-        };
-        ws.OnError += (sender, e) => {
-            Debug.Log(e.Message);
-        };
-
-        ws.OnClose += (sender, e) => {
-            Debug.Log(e.Reason);
-        };
-        ws.Connect();
         
     }
 
     private void Update()
     {
-        if(ws == null) {
+        if(server == null) {
             return;
         }
         while (EventManager.events.Count > 0)
         {
+   
             WSEvent _event = EventManager.events.Dequeue();
             switch (_event.Type)
             {
                 case EventType.Open:
-                    Debug.Log("//Open");
+                    //Debug.Log("//Open");
                     EventManager.PlayerJoin(_event.Name, _event.Data);
                     break;
                 case EventType.Message:
-                    Debug.Log("//Message");
+                    //Debug.Log("//Message");
                     EventManager.PlayerInput(_event.Data, _event.Name);
                     break;
                 case EventType.Error:
                     break;
                 case EventType.Close:
-                    Debug.Log("//Close");
+                   // Debug.Log("//Close");
                     EventManager.PlayerLeave(_event.Name);
                     break;
                 default:
@@ -95,7 +92,7 @@ public class Client : MonoBehaviour
     }
     void OnDestory()
     {
-        ws.Close();
+        server.Dispose();
     }
     private static Color32[] Encode(string textForEncoding, int width, int height)
     {

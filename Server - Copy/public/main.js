@@ -11,7 +11,6 @@ ws.onmessage = (message) => {
 function send(data) {
   ws.send(data)
 }
-document.body.style = "display:none";
 
 function handleOrientation(event) {
   console.log(event.alpha+","+event.beta+","+event.gamma);
