@@ -19,6 +19,9 @@
     
 </head>
 <body style="width: 100%;height: 100vh" > 
+    <div id="debug">
+       
+    </div>
     <div id="carselector" style="width: 100%;height: 100vh;">
         <button type="button" id="button_carselector_left"  style="width: 25%;height: 70%;vertical-align: top;display: inline-block;">Left</button>
         <button type="button" style="width: 48%;height: 70%;background-color: #313131;border: 0px;">  <img id="car" src="car1.png" style="width: 100%"></button>
@@ -33,6 +36,11 @@
         <button type="button" id="buttonleft"  style="width: 25%;height: 49%">Left</button>
         <button type="button" id="buttonright"  style="width: 25%;height: 49%">Right</button>
         <button type="button" id="buttondown"  style="width: 48%;height: 49%">Down</button>
+    </div>
+    <div id="pointercontroller" style="width: 100%;height: 100vh;display: none;">
+       
+        <button type="button" id="pointerstartbutton" onclick="onClick()" style="width: 99%;height: 99%;">_</button>
+        <button type="button" id="pointerbutton" style="width: 99%;height: 99%;display: none;">+</button>
     </div>
 <script src="main.js"></script>
 </body>
